@@ -1,0 +1,77 @@
+<form [formGroup]="dataForm" class="form-wrapper">
+  <section>
+    <span>SALDO INICIAL?</span>
+    <mat-checkbox formControlName="isChecked"></mat-checkbox>
+  </section>
+  <!-- SALDO -->
+  <div class="form-balance" *ngIf="isChecked" >
+    <p>
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Qtd</mat-label>
+        <input type="number" matInput formControlName="balanceQtd" placeholder="0">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Unid</mat-label>
+        <input type="number" matInput formControlName="balanceUnid" placeholder="0">
+        <span matTextPrefix>$&nbsp;</span>
+      </mat-form-field>
+    </p>
+  </div>
+
+  <mat-divider></mat-divider>
+  <ng-container formArrayName="dateData">
+    <div *ngFor="let dateData of dateDataControl.controls; let index = index" [formGroupName]="index">
+      <div class="form-date">
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Data</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" placeholder="01/01/1995">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </p>
+      </div>
+      <!-- ENTRADA -->
+      <mat-label>ENTRADA</mat-label>
+      <div class="form-entry">
+        <p>
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Qtd.</mat-label>
+            <input type="number" matInput formControlName="entryQtd" placeholder="0">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Unid.</mat-label>
+            <input type="number" matInput formControlName="entryUnid" placeholder="0">
+            <span matTextPrefix>$&nbsp;</span>
+          </mat-form-field>
+        </p>
+      </div>
+      <!-- SAIDA -->
+      <mat-label>SAIDA</mat-label>
+      <div class="form-out">
+        <p>
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Qtd.</mat-label>
+            <input type="number" matInput formControlName="outQtd" placeholder="0">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Unid.</mat-label>
+            <input type="number" matInput formControlName="outUnid" placeholder="0">
+            <span matTextPrefix>$&nbsp;</span>
+          </mat-form-field>
+        </p>
+      </div>
+      <mat-divider class="form-divider"></mat-divider>
+    </div>
+  </ng-container>
+  <div>
+    <button mat-button color="primary" (click)="addForm()" class="form-button">Adicionar Valores</button>
+    <button mat-button color="primary" (click)="sendData()" class="form-button">Montar Relatório</button>
+  </div>
+</form>
