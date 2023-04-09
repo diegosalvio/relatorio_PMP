@@ -55,6 +55,7 @@ export class FormComponent implements OnInit {
   sendData() {
     if (this.dataForm.valid) {
       console.log(this.dataForm.value)
+
       const dialogRef = this.dialog.open(TableComponent,{
         data: this.dataForm.value
       })
